@@ -5075,11 +5075,13 @@ bool Heap::SetUp() {
   if (!isolate_->memory_allocator()->SetUp(MaxReserved(), MaxExecutableSize()))
     return false;
 
+
   // Set up new space.
   if (!new_space_.SetUp(reserved_semispace_size_, max_semi_space_size_)) {
     return false;
   }
   new_space_top_after_last_gc_ = new_space()->top();
+
 
   // Initialize old pointer space.
   old_pointer_space_ = new OldSpace(this, max_old_generation_size_,
@@ -5087,12 +5089,12 @@ bool Heap::SetUp() {
   if (old_pointer_space_ == NULL) return false;
   if (!old_pointer_space_->SetUp()) return false;
 
+
   // Initialize old data space.
   old_data_space_ = new OldSpace(this, max_old_generation_size_, OLD_DATA_SPACE,
                                  NOT_EXECUTABLE);
   if (old_data_space_ == NULL) return false;
   if (!old_data_space_->SetUp()) return false;
-
   if (!isolate_->code_range()->SetUp(code_range_size_)) return false;
 
   // Initialize the code space, set its maximum capacity to the old
@@ -5102,10 +5104,14 @@ bool Heap::SetUp() {
   if (code_space_ == NULL) return false;
   if (!code_space_->SetUp()) return false;
 
+
   // Initialize map space.
   map_space_ = new MapSpace(this, max_old_generation_size_, MAP_SPACE);
   if (map_space_ == NULL) return false;
   if (!map_space_->SetUp()) return false;
+
+
+
 
   // Initialize simple cell space.
   cell_space_ = new CellSpace(this, max_old_generation_size_, CELL_SPACE);

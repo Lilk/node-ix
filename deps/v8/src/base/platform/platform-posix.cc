@@ -219,6 +219,7 @@ const char* OS::GetGCFakeMMapFile() {
 
 
 void* OS::GetRandomMmapAddr() {
+  return 0;
 #if V8_OS_NACL
   // TODO(bradchen): restore randomization once Native Client gets
   // smarter about using mmap address hints.

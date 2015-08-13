@@ -295,13 +295,17 @@ VirtualMemory::VirtualMemory(size_t size, size_t alignment)
   DCHECK(IsAligned(alignment, static_cast<intptr_t>(OS::AllocateAlignment())));
   size_t request_size = RoundUp(size + alignment,
                                 static_cast<intptr_t>(OS::AllocateAlignment()));
-  void* reservation = mmap(OS::GetRandomMmapAddr(),
+   void* reservation = mmap(OS::GetRandomMmapAddr(),
                            request_size,
                            PROT_NONE,
                            MAP_PRIVATE | MAP_ANONYMOUS | MAP_NORESERVE,
                            kMmapFd,
                            kMmapFdOffset);
-  if (reservation == MAP_FAILED) return;
+ // printf("Check MAP_FAILED \n");
+  if (reservation == MAP_FAILED){
+   // printf("MAP_FAILED for request_size: %d\n", request_size);
+   return;
+  }
 
   uint8_t* base = static_cast<uint8_t*>(reservation);
   uint8_t* aligned_base = RoundUp(base, alignment);

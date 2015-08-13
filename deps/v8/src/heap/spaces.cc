@@ -350,7 +350,9 @@ Address MemoryAllocator::ReserveAlignedMemory(size_t size, size_t alignment,
                                               base::VirtualMemory* controller) {
   base::VirtualMemory reservation(size, alignment);
 
+  //printf("ReserveAlignedMemory: %d, %d\n", size, alignment);
   if (!reservation.IsReserved()) return NULL;
+//  printf("All ok\n");
   size_ += reservation.size();
   Address base =
       RoundUp(static_cast<Address>(reservation.address()), alignment);
@@ -1189,6 +1191,7 @@ bool NewSpace::SetUp(int reserved_semispace_capacity,
   size_t size = 2 * reserved_semispace_capacity;
   Address base = heap()->isolate()->memory_allocator()->ReserveAlignedMemory(
       size, size, &reservation_);
+  // printf("Tried to reserve memory of size %d\n", size);
   if (base == NULL) return false;
 
   chunk_base_ = base;
