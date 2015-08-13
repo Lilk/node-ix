@@ -24,7 +24,9 @@ endif
 # just the debug build, run `make -C out BUILDTYPE=Debug` instead.
 ifeq ($(BUILDTYPE),Release)
 all: out/Makefile node
-else
+else  ifeq ($(BUILDTYPE),Debug)
+all: out/Makefile node_g
+else  
 all: out/Makefile node node_g
 endif
 
