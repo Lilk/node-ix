@@ -11,7 +11,7 @@
             'cflags': [ '-pthreads' ],
           }],
           ['OS not in "solaris android"', {
-            'cflags': [ '-pthread' ],
+            'cflags': [ '-pthread -lix' ],
           }],
         ],
       }],
