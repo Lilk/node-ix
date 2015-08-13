@@ -9,7 +9,7 @@
     'node_shared_zlib%': 'false',
     'node_shared_http_parser%': 'false',
     'node_shared_cares%': 'false',
-    'node_shared_libuv%': 'false',
+    'node_shared_libuv%': 'true',
     'node_use_openssl%': 'true',
     'node_shared_openssl%': 'false',
     'node_use_mdb%': 'false',
